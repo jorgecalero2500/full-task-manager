@@ -12,21 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (vti !== '') {
             if (isEditing) {
                 tasks = tasks.map(task =>
-                    task.id === editingId ? {
-                        ...task, text: vti
-                    } : task);
+                    task.id === editingId ? { ...task, text: vti } : task
+                );
                 isEditing = false;
                 editingId = null;
                 taskForm.innerText = "Agregar";
-            }
-            else {
+            } else {
                 const task = {
                     id: Date.now(),
                     text: vti,
                     complete: false
                 };
                 tasks.push(task);
-                console.log(tasks);
             }
             renderTasks();
             taskInput.value = '';
@@ -35,23 +32,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderTasks() {
         taskList.innerHTML = '';
-        tasks.forEach(
-            task => {
-                console.log(task);
-
-                const li = document.createElement('li');
-                li.innerHTML =
-                    '<span>' + task.text + '</span>' +
-                    '<div>' +
-                    '<button class="edit-btn" onclick="editTask(' + task.id + ')">' +
-                    'Editar </button>' +
-                    '<button class="delete-btn" onclick="deleteTask(' + task.id + ')">' +
-                    'Eliminar </button>' +
-                    '</div>';
-                taskList.appendChild(li);
+        tasks.forEach(task => {
+            const li = document.createElement('li');
+            li.innerHTML =
+                `<span>${task.text}</span>
+                <div>
+                    <button class="edit-btn" onclick="editTask(${task.id})">Editar</button>
+                    <button class="delete-btn" onclick="deleteTask(${task.id})">Eliminar</button>
+                    <button class="complete-btn ${task.complete ? 'completed' : ''}" onclick="completeTask(this, ${task.id})">${task.complete ? 'Completo' : 'Completar'}</button>
+                </div>`;
+            taskList.appendChild(li);
+            if (task.complete) {
+                li.style.backgroundColor = 'lightblue';
+                const completeButton = li.querySelector('.complete-btn');
+                const otherButtons = li.querySelectorAll('button:not(.complete-btn)');
+                otherButtons.forEach(b => b.remove());
             }
-
-        );
+        });
     }
 
     window.deleteTask = function (id) {
@@ -60,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.editTask = function (id) {
-        console.log(id);
         const et = tasks.find(t => t.id === id);
         if (et) {
             taskInput.value = et.text;
@@ -70,4 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    window.completeTask = function (btn, id) {
+        const taskIndex = tasks.findIndex(task => task.id === id);
+        if (taskIndex !== -1) {
+            tasks[taskIndex].complete = true;
+            renderTasks();
+        }
+    }
+
+    renderTasks();
 });
