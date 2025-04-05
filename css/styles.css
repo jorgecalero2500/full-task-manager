@@ -32,23 +32,35 @@ li {
     border-radius: 5px;
 }
 
+/* ✅ Estilo para botón EDITAR */
 .edit-btn {
+    background-color: #007bff; /* Azul */
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
     margin-right: 5px;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: white;
-    background-color: blue;
-    color: #f9f9f9;
-
-
+    cursor: pointer;
 }
 
-.delete-btn{
-    background-color: red;
+/* ✅ Estilo para botón ELIMINAR */
+.delete-btn {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+    border: none;
+    padding: 6px 10px;
     border-radius: 5px;
-    padding: 5PX;
-    border-color: white;
-    color: #f9f9f9;
-
-
+    margin-right: 5px;
+    cursor: pointer;
 }
+
+/* ✅ Estilo para botón COMPLETAR */
+.complete-btn {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
