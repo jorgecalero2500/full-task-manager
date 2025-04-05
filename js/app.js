@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let editingId = null;
 
     taskForm.addEventListener('click', (e) => {
+
         const vti = taskInput.value.trim();
         if (vti !== '') {
             if (isEditing) {
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         taskList.innerHTML = '';
         tasks.forEach(task => {
             const li = document.createElement('li');
+            li.className='flex justify-between items-center bg-gray-100 px-15 py-15 rounded';
             li.innerHTML =
                 `<span>${task.text}</span>
                 <div>
